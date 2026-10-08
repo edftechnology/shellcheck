@@ -1,365 +1,233 @@
 <!-- LOGOTIPO DO PROJETO -->
 <div style="display: flex; justify-content: center;">
-   <a href="https://github.com/SEU-USUARIO/SEU-PROJETO">
+   <a href="https://github.com/edftechnology/shellcheck">
      <img src="docs/figures/logo.png" alt="Logo" width="200" height="100">
    </a>
 </div>
 
-<h3 align="center">NomeDoProjeto</h3>
+<h3 align="center">ShellCheck</h3>
 
 <div style="display: flex; justify-content: center;">
-  <a href="https://doi.org/SEU-DOI">
-    <img src="https://zenodo.org/badge/SEU_BADGE.svg" alt="DOI">
+  <a href="https://doi.org/10.5281/zenodo.14711872">
+    <img src="https://zenodo.org/badge/10.5281/zenodo.14711872.svg" alt="DOI">
   </a>
 </div>
 
 <p align="center">
- Uma descrição curta e genérica do projeto. Substitua por um resumo real quando usar este template.
+ Ferramenta de análise estática para scripts de shell.
  <br />
- <a href="https://github.com/SEU-USUARIO/SEU-PROJETO"><strong>Explore os documentos »</strong></a>
+ <a href="https://github.com/edftechnology/shellcheck"><strong>Explore os documentos »</strong></a>
  <br />
  <br />
- <a href="https://github.com/SEU-USUARIO/SEU-PROJETO">Ver demonstração</a>
+ <a href="https://github.com/edftechnology/shellcheck">Ver demonstração</a>
  ·
- <a href="https://github.com/SEU-USUARIO/SEU-PROJETO">Relatar bug</a>
+ <a href="https://github.com/edftechnology/shellcheck">Relatar bug</a>
  ·
- <a href="https://github.com/SEU-USUARIO/SEU-PROJETO">Solicitar recurso</a>
+ <a href="https://github.com/edftechnology/shellcheck">Solicitar recurso</a>
 </p>
 
-
-
+# Como instalar/configurar/usar o `shellcheck` no `Linux Ubuntu`
 
 ## Resumo
 
-Resumo genérico do projeto. Explique o problema, o objetivo e o valor da solução em 2-4 linhas.
+Guia para instalar o `shellcheck` no `Linux Ubuntu` pelo `Terminal Emulator`, usando o pacote oficial dos repositórios do `Ubuntu` com `apt`.
 
 ## _Abstract_
 
-_Generic abstract in English. Summarize the purpose, scope, and outputs in 2-4 lines._
-
+_A guide to install `shellcheck` on `Linux Ubuntu` through the `Terminal Emulator`, using the official Ubuntu repository package with `apt`._
 
 
 ## Descrição
 
-`<nome_da_aplicacao>`
+### `shellcheck`
 
-Colocar a descrição da aplicação/subaplicação aqui.
-
-<!-- COMEÇANDO -->
-### Começando
-
-Este template mostra como documentar a configuração local do projeto. Substitua pelos passos reais.
+O `shellcheck` é uma ferramenta de análise estática para scripts de shell. Ela identifica problemas de sintaxe, práticas inseguras e possíveis erros em scripts `sh` e `bash`.
 
 
+## Pré-requisitos
 
-### Pré-requisitos
-
-Lista genérica de ferramentas necessárias. Ajuste versões e remova o que não se aplica.
-
-* [![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
-
-* [![Anaconda](https://img.shields.io/badge/Anaconda-4.x-44A833?style=flat-square&logo=anaconda&logoColor=white)](https://www.anaconda.com/)
-
-* [![Git](https://img.shields.io/badge/Git-2.x-F05032?style=flat-square&logo=git&logoColor=white)](https://git-scm.com/)
-
-* [![VS Code](https://img.shields.io/badge/VS%20Code-1.x-007ACC?style=flat-square&logo=visual-studio-code&logoColor=white)](https://code.visualstudio.com/) ou qualquer IDE compatível
-
-<p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
+- Permissão para usar `sudo`
+- Conexão com a internet para atualizar os índices e instalar o pacote
+- `apt` funcional no sistema
+- Repositório `universe` habilitado, onde o pacote está publicado
 
 
+## 1. Abrir o `Terminal Emulator`
+
+1. Abrir o `Terminal Emulator`. Você pode fazer isso pressionando:
+
+    ```bash
+    Ctrl + Alt + T
+    ```
 
 
-## Guia de instalação
+2. Certifique-se de que seu sistema esteja limpo e atualizado.
 
-### Instalar o Git
+    2.1 Limpar o `cache` do gerenciador de pacotes `apt`. Especificamente, ele remove todos os arquivos de pacotes (`.deb`) baixados pelo `apt` e armazenados em `/var/cache/apt/archives/`. Digite o seguinte comando:
 
-Explique como instalar o Git ou remova esta seção se não for necessária.
+    ```bash
+    sudo apt clean
+    ```
 
-<p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
+    2.2 Remover pacotes `.deb` antigos ou duplicados do `cache` local. É útil para liberar espaço, pois remove apenas os pacotes que não podem mais ser baixados (ou seja, versões antigas de pacotes que foram atualizados). Digite o seguinte comando:
 
+    ```bash
+    sudo apt autoclean
+    ```
 
+    2.3 Remover pacotes que foram automaticamente instalados para satisfazer as dependências de outros pacotes e que não são mais necessários. Digite o seguinte comando:
 
-## Guia de instalação
+    ```bash
+    sudo apt autoremove -y
+    ```
 
-### Instalar o Git
+    2.4 Buscar as atualizações disponíveis para os pacotes que estão instalados em seu sistema. Digite o seguinte comando e pressione `Enter`:
 
-Reforço do conteúdo ou seção extra. Mantenha ou remova conforme o uso do template.
+    ```bash
+    sudo apt update
+    ```
 
-<p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
+    2.5 **Corrigir pacotes quebrados**: Isso atualizará a lista de pacotes disponíveis e tentará corrigir pacotes quebrados ou com dependências ausentes:
 
+    ```bash
+    sudo apt --fix-broken install
+    ```
 
+    2.6 Limpar o `cache` do gerenciador de pacotes `apt` novamente:
 
-#### `Windows` [2]
+    ```bash
+    sudo apt clean
+    ```
 
-Explique como configurar SSH no Windows (ou ajuste para o provedor desejado).
+    2.7 Para ver a lista de pacotes a serem atualizados, digite o seguinte comando e pressione `Enter`:
 
-1. Verifique se o Git está instalado.
-2. Abra o Git Bash.
-3. Gere uma chave SSH (`ssh-keygen -t rsa -C "seu_email@exemplo.com"`).
-4. Adicione a chave no provedor (GitHub/GitLab/Bitbucket).
+    ```bash
+    sudo apt list --upgradable
+    ```
 
-<p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
+    2.8 Realmente atualizar os pacotes instalados para as suas versões mais recentes, com base na última vez que você executou `sudo apt update`. Digite o seguinte comando e pressione `Enter`:
 
-
-
-### Atualizar pacotes `pip` e `setuptools` [3]
-
-Exemplo genérico de atualização de pacotes:
-
-1. `pip install --upgrade pip`
-2. `pip install --upgrade setuptools`
-3. `pip install --upgrade wheel`
-
-
-
-### Clonar o repositório do Git e instalar dependências
-
-#### `Linux`
-
-1. **Clone o repositório:**
-
-  - **Pelo terminal:** `git clone git@github.com:SEU-USUARIO/SEU-PROJETO.git`
-
-  - **(Ou)** baixar o `.zip` na página do GitHub
-
-  <p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
+    ```bash
+    sudo apt full-upgrade -y
+    ```
 
 
+## 3. Instalar o `shellcheck` via `apt`
 
-#### `Windows`
+O pacote `shellcheck` está disponível nos repositórios do `Ubuntu`, na seção `universe`. Se necessário, habilitar essa seção e atualizar o índice de pacotes.
 
-1. **Clone o repositório:**
+1. Habilitar o repositório `universe` e atualizar os índices de pacotes:
 
-  - **Pelo terminal:** `git clone git@github.com:SEU-USUARIO/SEU-PROJETO.git`
+    ```bash
+    sudo add-apt-repository universe
+    sudo apt update
+    ```
 
-  - (Ou) baixar o `.zip` na página do GitHub
+2. Instalar o `shellcheck`:
 
-  <p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
+    ```bash
+    sudo apt install shellcheck -y
+    ```
+
+3. Confirmar a instalação e consultar a versão:
+
+    ```bash
+    shellcheck --version
+    ```
 
 
+## 4. Usar o `shellcheck`
 
-## Como executar a aplicação
+1. Analisar um script:
 
-### Executar a partir do `Terminal Emulator`
+    ```bash
+    shellcheck caminho/do_script.sh
+    ```
 
-1. Exemplo genérico de execução:
+2. Analisar todos os arquivos `.sh` do diretório atual:
+
+    ```bash
+    find . -type f -name '*.sh' -print0 | xargs -0 -r shellcheck
+    ```
+
+3. Consultar as opções disponíveis:
+
+    ```bash
+    shellcheck --help
+    ```
+
+
+## 5. Desinstalar o `shellcheck` (opcional)
+
+Para remover o pacote instalado pelo `apt`, executar:
 
 ```bash
-python3 main.py --input caminho/para/arquivo --output caminho/para/saida
-```
-
-<p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
-
-
-
-
-### Executar a partir da `Graphical User Interface (GUI)`
-
-1. Exemplo genérico de execução:
-
-```bash
-python3 scripts/app_gui.py
-```
-
-
-
-## Mostrar ajuda
-
-1. Exemplo genérico de ajuda:
-
-```bash
-python3 main.py --help
+sudo apt remove shellcheck -y
 ```
 
 
+## 6. Código completo para configurar/instalar/usar
 
-### Exemplo de Saída Esperada
+Para configurar/instalar/usar o `shellcheck` no `Linux Ubuntu` sem precisar digitar linha por linha, você pode seguir estas etapas:
 
-Exemplo genérico (substitua pelo help real do projeto):
+1. Abrir o `Terminal Emulator`. Você pode fazer isso pressionando:
 
-```bash
-usage: main.py [-h] --input INPUT [--output OUTPUT]
-```
+    ```bash
+    Ctrl + Alt + T
+    ```
 
+2. Digitar os comandos abaixo e pressionar `Enter`:
 
-
-## O que o aplicativo faz?
-
-Describe in English, at a high level, what the application does and the main outputs.
-
-- Example capability 1
-- Example capability 2
-- Example capability 3
-
-
-
-
-## O que o aplicativo exibe como saída(s)
-
-# Relatório de Análise de Dados
-
-## 1. Introdução
-
-- Objetivo da análise: descrição genérica.
-- Descrição do conjunto de dados analisado: origem, tamanho, formato.
-- Metodologia utilizada para a análise.
-
-## 2. Estatísticas Gerais do Conjunto de Dados
-
-- Número total de variáveis.
-- Número total de registros.
-- Tipos de dados por variável.
-- Resumo da ocupação de memória.
-
-## 3. Qualidade dos Dados
-
-- Valores faltantes: contagem e percentual.
-- Valores únicos por variável.
-- Distribuição de valores nulos ou infinitos.
-- Detecção de espaços em branco no início/fim.
-
-## 4. Estatísticas Descritivas das Variáveis Numéricas
-
-- Contagem de valores válidos.
-- Média, mediana, moda.
-- Desvio padrão e variância.
-- Valor mínimo e máximo.
-- Quartis.
-
-## 5. Análise de Outliers
-
-- Critério de outliers (ex.: 1.5x IQR).
-- Variáveis com maior presença de outliers.
-
-## 6. Correlações Entre Variáveis
-
-- Matriz de correlação.
-- Variáveis altamente correlacionadas.
-
-## 7. Estatísticas de Variáveis Categóricas
-
-- Contagem de ocorrências por categoria.
-- Percentual de distribuição por categoria.
-
-## 8. Análise de Tendências Temporais (se aplicável)
-
-- Distribuição temporal dos dados.
-- Identificação de padrões sazonais.
-
-## 9. Conclusões e Próximos Passos
-
-- Resumo dos principais insights.
-- Sugestões de melhorias/transformações.
-- Próximos passos.
+    ```bash
+    sudo apt clean
+    sudo apt autoclean
+    sudo apt autoremove -y
+    sudo apt update
+    sudo apt --fix-broken install
+    sudo apt clean
+    sudo apt list --upgradable
+    sudo apt full-upgrade -y
+    sudo add-apt-repository universe
+    sudo apt update
+    sudo apt install shellcheck -y
+    shellcheck --version
+    shellcheck caminho/do_script.sh
+    ```
 
 
-## Gráficos Essenciais no Relatório
+## Compatibilidade
 
-- Histogramas
-- Boxplots
-- Heatmap de correlação
-- Gráfico de dispersão
-- Gráficos de barras
-- Linha do tempo (se aplicável)
+- O pacote `shellcheck` consta nos repositórios do `Ubuntu` para versões como `Jammy` (22.04 LTS) e `Noble` (24.04 LTS), na seção `universe`.
+- A versão instalada depende da versão do `Ubuntu` e dos repositórios habilitados.
+- O método descrito instala o próprio `shellcheck` pelo `apt`; não compila o código-fonte.
 
 
-
-## 1. Função da Aplicação
-
-Descrição genérica da função principal do módulo.
-
-### 1.1 Entrada(s)
-
-1. Formatos de arquivo suportados (ex.: `.csv`, `.xlsx`).
-
-### 1.2 Saída(s)
-
-1. Descrição das saídas esperadas.
-
-
-
-## 2. Observação(ões)
-
-1. Observações gerais e boas práticas.
-2. Restrições conhecidas.
-
-
-
-# 3. Futura(s) Melhoria(s)
-
-- Lista de melhorias planejadas.
-
-
-
-<!-- LICENÇA -->
 ## Licença
 
-Distribuído sob a licença `MIT`. Consulte `LICENSE.txt` para obter mais informações.
+Este repositório inclui o arquivo `LICENSE.txt`.
 
-<p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
+## Contato e suporte
 
-
-
-<!-- ROTEIRO -->
-## Roteiro
-
-- [ ] Adicionar registro de alterações
-- [ ] Adicionar links de volta ao topo
-- [ ] Adicionar modelos adicionais com exemplos
-- [ ] Suporte multilíngue
-
-Consulte os problemas abertos para obter uma lista completa dos recursos propostos.
-
-<p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
-
-
-
-
-<!-- CONTRIBUIÇÔES -->
-## Contribuições
-
-Explique como contribuir (fork, branch, PR, issues).
-
-1. Bifurque o projeto
-2. Crie sua ramificação (`git checkout -b feature/NovaFuncionalidade`)
-3. Confirme suas alterações (`git commit -m 'Describe change'`)
-4. Envie para a filial (`git push origin feature/NovaFuncionalidade`)
-5. Abra uma solicitação `pull`
-
-<p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
-
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Agradecimentos
-
-* [Best README Template](https://github.com/othneildrew/Best-README-Template?tab=readme-ov-file)
-
-* [Choose an Open Source License](https://choosealicense.com)
-
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-
-* [Img Shields](https://shields.io)
-
-* [GitHub Pages](https://pages.github.com)
-
-* [Font Awesome](https://fontawesome.com)
-
-* [React Icons](https://react-icons.github.io/react-icons/search)
-
-<p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
-
-
+Para dúvidas ou problemas, consulte o repositório oficial do `shellcheck` e a documentação da sua versão do `Linux Ubuntu`.
 
 
 ## Referências
 
-[1] Fonte ou documentação relevante.
-[2] Artigo, tutorial ou manual adicional.
-[3] Outro link útil.
+[1] OPENAI.
+**Instalar o `shellcheck` no `linux ubuntu` pelo `terminal emulator`**.
+Disponível em: <https://chatgpt.com/g/g-p-6980caf949648191ad6acfcdbe590f9e-instalar/c/6ac7e15c-ee78-83e9-8b08-cbd493e08ee7>.
+ChatGPT.
+Acessado em: 08/10/2026.
+
+[2] KOALAMAN.
+**ShellCheck, ferramenta de análise estática para scripts de shell**.
+Disponível em: <https://github.com/koalaman/shellcheck>.
+GitHub.
+Acessado em: 08/10/2026.
+
+[3] UBUNTU.
+**Pacote `shellcheck`**.
+Disponível em: <https://packages.ubuntu.com/search?exact=1&keywords=shellcheck&searchon=names&section=all&suite=all>.
+Ubuntu Packages.
+Acessado em: 08/10/2026.
 
